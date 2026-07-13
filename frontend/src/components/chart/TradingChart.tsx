@@ -44,10 +44,24 @@ const symbols: Record<string, string> = {
   DJI: "DJ:DJI",
 };
 
-const intervals: Record<string, string> = {
+type TVInterval =
+  | "1"
+  | "3"
+  | "5"
+  | "15"
+  | "30"
+  | "60"
+  | "120"
+  | "180"
+  | "240"
+  | "D"
+  | "W";
+
+const intervals: Record<string, TVInterval> = {
   "1m": "1",
   "5m": "5",
   "15m": "15",
+  "30m": "30",
   "1h": "60",
   "4h": "240",
   "1d": "D",
@@ -61,16 +75,13 @@ export default function TradingChart({
     symbols[symbol.toUpperCase()] ??
     `NASDAQ:${symbol.toUpperCase()}`;
 
-  const interval =
+  const interval: TVInterval =
     intervals[timeframe] ?? "60";
 
   return (
     <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-xl">
-
       <div className="mb-6 flex items-center justify-between">
-
         <div>
-
           <h2 className="text-3xl font-bold text-white">
             Live Trading Chart
           </h2>
@@ -78,17 +89,14 @@ export default function TradingChart({
           <p className="mt-2 text-slate-400">
             {symbol.toUpperCase()} • {timeframe.toUpperCase()}
           </p>
-
         </div>
 
         <div className="rounded-full bg-green-500/20 px-4 py-2 text-sm font-bold text-green-400">
           LIVE
         </div>
-
       </div>
 
       <div className="overflow-hidden rounded-xl border border-slate-800">
-
         <AdvancedRealTimeChart
           theme="dark"
           symbol={tvSymbol}
@@ -100,9 +108,7 @@ export default function TradingChart({
           allow_symbol_change={false}
           withdateranges
         />
-
       </div>
-
     </section>
   );
 }
