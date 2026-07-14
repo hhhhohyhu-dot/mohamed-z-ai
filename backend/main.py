@@ -1,15 +1,9 @@
 from fastapi import FastAPI
 
+print("========== MOHAMED Z AI STARTED ==========")
+
 app = FastAPI()
 
 @app.get("/")
 async def root():
     return {"message": "WORKING 123"}
-
-@app.get("/health")
-async def health():
-    return {"status": "healthy"}
-
-@app.get("/docs-test")
-async def docs_test():
-    return {"working": True}
